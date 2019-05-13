@@ -10,8 +10,8 @@ export default {
   darkBlueColor: "#003569",
   redColor: "#ED4956",
   whiteBox: `
-    ${BORDER_RADIUS};
-    ${BOX_BORDER}
+    border:${BORDER_RADIUS};
+    border-radius:${BOX_BORDER};
     background-color: white;
   `
 };
