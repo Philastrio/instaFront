@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
+import useInput from "../Hooks/useInput";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -48,23 +49,28 @@ const Form = styled(Box)`
 
 export default () => {
   const [action, setAction] = useState("logIn");
+  const name = useInput("");
+  const lastName = useInput("");
+  const firstName = useInput("");
+  const password = useInput("");
+  const email = useInput("");
 
   return (
     <Wrapper>
       <Form>
         {action === "logIn" ? (
           <form>
-            <Input placeholder={"아이디"} />
-            <Input placeholder={"이름"} />
+            <Input placeholder={"아이디"} {...name} />
+            <Input placeholder={"비밀번호"} {...password} type="password" />
             <Button text={"로그인"} />
           </form>
         ) : (
           <form>
-            <Input placeholder={"성"} />
-            <Input placeholder={"이름"} />
-            <Input placeholder={"사용자 이름"} />
-            <Input placeholder={"이메일 주소"} />
-            <Input placeholder={"비밀번호"} />
+            <Input placeholder={"아이디"} {...name} />
+            <Input placeholder={"성"} {...lastName} />
+            <Input placeholder={"명"} {...firstName} />
+            <Input placeholder={"이메일 주소"} {...email} type="email" />
+            <Input placeholder={"비밀번호"} {...password} type="password" />
             <Button text={"가입"} />
           </form>
         )}
