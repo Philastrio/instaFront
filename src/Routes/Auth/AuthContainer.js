@@ -7,24 +7,17 @@ import { toast } from "react-toastify";
 
 export default () => {
   const [action, setAction] = useState("logIn");
+
   const name = useInput("");
   const lastName = useInput("");
   const firstName = useInput("");
+  const secret = useInput("");
   const email = useInput("");
-  const requestSecret = useMutation(LOG_IN, {
-    update: (_, data) => {
-      const { requestSecret } = data;
-      if (!requestSecret) {
-        toast.error("계정이 없으신가요? 가입하기");
-        setTimeout(() => {
-          setAction("signUp");
-        }, 3000);
-      }
-    },
+  const requestSecretMutatin = useMutation(LOG_IN, {
     variables: { email: email.value }
   });
 
-  const createAccount = useMutation(CREATE_ACCOUNT, {
+  const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
       email: email.value,
       name: name.value,
@@ -38,9 +31,20 @@ export default () => {
     if (action === "logIn") {
       if (email.value !== "") {
         try {
-          await requestSecret();
+          const {
+            data: { requestSecret }
+          } = await requestSecretMutatin();
+          if (!requestSecret) {
+            toast.error("계정이 없으신가요? 가입하기");
+            setTimeout(() => {
+              setAction("signUp");
+            }, 3000);
+          } else {
+            toast.success("가입시 기재된 이메일을 확인해주세요");
+            setAction("confirm");
+          }
         } catch (error) {
-          toast.error("Can't request secret, try again!");
+          toast.error("비밀코드를 얻을 수 없습니다. 다시 시도해 주세요");
         }
       } else {
         toast.error("이메일을 입력해주세요");
@@ -52,7 +56,22 @@ export default () => {
         lastName.value !== "" &&
         firstName.value !== ""
       ) {
-        createAccount();
+        try {
+          const {
+            data: { createAccount }
+          } = await createAccountMutation();
+          if (!createAccount) {
+            toast.error("계정을 생성할 수 없습니다");
+          } else {
+            toast.success("계정 생성에 성공했습니다. 로그인해주세요 ");
+            setTimeout(() => setAction("로그인"), 3000);
+          }
+        } catch (e) {
+          toast.error(
+            console.log(e.message),
+            "계정을 생성할 수 없습니다. 다시 시도해주세요"
+          );
+        }
       } else {
         toast.error("모든 항목을 기입해주세요");
       }
@@ -66,6 +85,7 @@ export default () => {
       name={name}
       lastName={lastName}
       firstName={firstName}
+      secret={secret}
       email={email}
       onSubmit={onSubmit}
     />
