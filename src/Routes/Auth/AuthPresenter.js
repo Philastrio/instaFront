@@ -80,22 +80,25 @@ export default ({
             required
             {...secret}
           />
-          <Button text={"확인"} />
+          <Button text={"확 인"} />
         </form>
       )}
     </Form>
-    <StateChanger>
-      {action === "logIn" ? (
-        <>
-          계정이 없으신가요?{" "}
-          <Link onClick={() => setAction("signUp")}>가입하기</Link>
-        </>
-      ) : (
-        <Box>
-          계정이 있으신가요?{" "}
-          <Link onClick={() => setAction("logIn")}>로그인</Link>
-        </Box>
-      )}
-    </StateChanger>
+
+    {action !== "confirm" && (
+      <StateChanger>
+        {action === "logIn" ? (
+          <>
+            계정이 없으신가요?{" "}
+            <Link onClick={() => setAction("signUp")}>가입하기</Link>
+          </>
+        ) : (
+          <Box>
+            계정이 있으신가요?{" "}
+            <Link onClick={() => setAction("logIn")}>로그인</Link>
+          </Box>
+        )}
+      </StateChanger>
+    )}
   </Wrapper>
 );
