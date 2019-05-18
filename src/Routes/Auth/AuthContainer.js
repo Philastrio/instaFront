@@ -97,9 +97,11 @@ export default () => {
           } = await confirmSecretMutation();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
+          } else {
+            throw Error();
           }
         } catch {
-          toast.error("비밀코드를 잘못 입력했습니다");
+          toast.error("비밀코드를 잘못 입력했습니다. 다시 시도해주세요");
         }
       }
     }
