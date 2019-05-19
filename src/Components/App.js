@@ -7,10 +7,11 @@ import { HashRouter as Router } from "react-router-dom";
 import { gql } from "apollo-boost";
 import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from "../Styles/Theme";
-import Routes from "./Router";
+
 import { useQuery } from "react-apollo-hooks";
 import Footer from "./Footer";
 import Header from "./Header";
+import Routes from "./Router";
 
 const QUERY = gql`
   {
@@ -37,7 +38,7 @@ export default () => {
           <>
             <Header />
             <Wrapper>
-              <Router isLoggedIn={isLoggedIn} />
+              <Routes isLoggedIn={isLoggedIn} />
               <Footer />
             </Wrapper>
           </>
