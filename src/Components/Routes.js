@@ -9,23 +9,22 @@ import Profile from "../Routes/Profile";
 import React from "react";
 
 const LoggedInRoutes = () => (
-  <>
+  <Switch>
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
     <Route path="/:name" component={Profile} />
-  </>
+  </Switch>
 );
 
 const LoggedOutRoutes = () => (
-  <>
+  <Switch>
     <Route exact path="/" component={Auth} />
-  </>
+  </Switch>
 );
 
-const Routes = ({ isLoggedIn }) => (
-  <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}</Switch>
-);
+const Routes = ({ isLoggedIn }) =>
+  isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />;
 
 Routes.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
