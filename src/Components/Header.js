@@ -62,9 +62,9 @@ const HeaderLink = styled(Link)`
 `;
 
 const ME = gql`
-  me {
-    name: {
-
+  {
+    me {
+      name
     }
   }
 `;
