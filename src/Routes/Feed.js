@@ -43,5 +43,10 @@ const Wrapper = styled.div`
 
 export default () => {
   const { data, loading } = useQuery(FEED_QUERY);
-  return <Wrapper>{loading && <Loader />}</Wrapper>;
+  return (
+    <Wrapper>
+      {loading && <Loader />}
+      {!loading && data && data.seeFeed && "사진이 존재 합니다"}
+    </Wrapper>
+  );
 };
