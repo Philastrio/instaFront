@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "rl-react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
@@ -59,29 +60,44 @@ export default ({
   <Wrapper>
     <Form>
       {action === "logIn" && (
-        <form onSubmit={onSubmit}>
-          <Input placeholder={"이메일 주소"} {...email} type="email" />
-          <Button text={"로그인"} />
-        </form>
+        <>
+          <Helmet>
+            <title>로그인 | HKgram</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input placeholder={"이메일 주소"} {...email} type="email" />
+            <Button text={"로그인"} />
+          </form>
+        </>
       )}
       {action === "signUp" && (
-        <form onSubmit={onSubmit}>
-          <Input placeholder={"아이디"} {...name} />
-          <Input placeholder={"성"} {...lastName} />
-          <Input placeholder={"명"} {...firstName} />
-          <Input placeholder={"이메일 주소"} {...email} type="email" />
-          <Button text={"가입"} />
-        </form>
+        <>
+          <Helmet>
+            <title>가입 | HKgram</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input placeholder={"아이디"} {...name} />
+            <Input placeholder={"성"} {...lastName} />
+            <Input placeholder={"명"} {...firstName} />
+            <Input placeholder={"이메일 주소"} {...email} type="email" />
+            <Button text={"가입"} />
+          </form>
+        </>
       )}
       {action === "confirm" && (
-        <form onSubmit={onSubmit}>
-          <Input
-            placeholder="당신의 비밀코드를 붙여넣어 주세요"
-            required
-            {...secret}
-          />
-          <Button text={"확 인"} />
-        </form>
+        <>
+          <Helmet>
+            <title>확인 | HKgram</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input
+              placeholder="당신의 비밀코드를 붙여넣어 주세요"
+              required
+              {...secret}
+            />
+            <Button text={"확 인"} />
+          </form>
+        </>
       )}
     </Form>
 
