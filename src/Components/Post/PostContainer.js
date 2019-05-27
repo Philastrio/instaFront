@@ -51,6 +51,19 @@ const PostContainer = ({
     }
   };
 
+  const onKeyPress = async event => {
+    const { which } = event;
+
+    if (which === 13) {
+      console.log("OK");
+      await event.preventDefault();
+      comment.setValue("");
+    } else {
+      console.log("error");
+    }
+    return;
+  };
+
   return (
     <PostPresenter
       user={user}
@@ -66,6 +79,7 @@ const PostContainer = ({
       setLikeCount={setLikeCount}
       currentItem={currentItem}
       toggleLike={toggleLike}
+      onKeyPress={onKeyPress}
     />
   );
 };
