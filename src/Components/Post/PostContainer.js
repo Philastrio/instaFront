@@ -46,6 +46,7 @@ const PostContainer = ({
       newComment={comment}
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
+      currentItem={currentItem}
     />
   );
 };

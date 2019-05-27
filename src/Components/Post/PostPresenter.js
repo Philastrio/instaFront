@@ -46,10 +46,13 @@ const File = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
+  opacity: ${props => (props.showing ? 1 : 0)};
+  transition: opacity 0.5s linear;
 `;
 
 const Button = styled.span`
   cursor: pointer;
+  }
 `;
 
 const Meta = styled.div`
@@ -93,7 +96,8 @@ export default ({
   isLiked,
   likeCount,
   createdAt,
-  newComment
+  newComment,
+  currentItem
 }) => (
   <Post>
     <Header>
@@ -104,7 +108,10 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files && files.map(file => <File id={file.id} src={file.url} />)}
+      {files &&
+        files.map((file, index) => (
+          <File id={file.id} src={file.url} showing={index === currentItem} />
+        ))}
     </Files>
     <Meta>
       <Buttons>
