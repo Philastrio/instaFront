@@ -112,7 +112,8 @@ export default ({
   currentItem,
   toggleLike,
   onKeyPress,
-  comments
+  comments,
+  selfComments
 }) => (
   <Post>
     <Header>
@@ -146,6 +147,12 @@ export default ({
       {comments && (
         <Comments>
           {comments.map(comment => (
+            <Comment key={comment.id}>
+              <FatText text={comment.user.name} />
+              {comment.text}
+            </Comment>
+          ))}
+          {selfComments.map(comment => (
             <Comment key={comment.id}>
               <FatText text={comment.user.name} />
               {comment.text}

@@ -5,6 +5,8 @@ import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { TOGGEL_LIKE, ADD_COMMENT } from "./PostQueries";
 
+import { toast } from "react-toastify";
+
 const PostContainer = ({
   id,
   user,
@@ -19,7 +21,9 @@ const PostContainer = ({
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
+  const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
+
   const toggleLikeMutation = useMutation(TOGGEL_LIKE, {
     variables: { postId: id }
   });
@@ -53,13 +57,32 @@ const PostContainer = ({
 
   const onKeyPress = async event => {
     const { which } = event;
-
     if (which === 13) {
-      console.log("OK");
-      await event.preventDefault();
-      comment.setValue("");
-    } else {
-      console.log("error");
+      event.preventDefault();
+      try {
+        const {
+          data: { addComment }
+        } = await addCommentMutation();
+        setSelfComments([...selfComments, addComment]);
+        comment.setValue("");
+      } catch {
+        toast.error("댓글을 달 수 없습니다. 시스템 오류");
+      }
+      /* 아래는 페이크 아이디를 넣어서 작동시켜주는 것이다.
+      try {
+        const data = await addCommentMutation();
+        console.log(data);
+        setSelfComments([
+          ...selfComments,
+          {
+            id: Math.floor(Math.random() * 1000),
+            text: comment.value,
+            user: { name: meQuery.me.name }
+          }
+        ]);
+      } catch {
+        toast.error("댓글을 달 수 없습니다. 시스템 오류");
+      } */
     }
     return;
   };
@@ -80,6 +103,7 @@ const PostContainer = ({
       currentItem={currentItem}
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
+      selfComments={selfComments}
     />
   );
 };
