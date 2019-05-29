@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const SEARCH = gql`
-  query searchPost($term: String!) {
+  query search($term: String!) {
     searchPost(term: $term) {
       files {
         url

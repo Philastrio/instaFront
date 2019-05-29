@@ -1,2 +1,2 @@
-import SearchContainer from "./searchContainer";
+import SearchContainer from "./SearchContainer";
 export default SearchContainer;
