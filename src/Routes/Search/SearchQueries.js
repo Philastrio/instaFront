@@ -12,6 +12,7 @@ export const SEARCH = gql`
       avatar
       name
       isFollowing
+      isSelf
     }
   }
 `;

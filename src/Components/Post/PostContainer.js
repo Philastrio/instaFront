@@ -84,7 +84,6 @@ const PostContainer = ({
         toast.error("댓글을 달 수 없습니다. 시스템 오류");
       } */
     }
-    return;
   };
 
   return (

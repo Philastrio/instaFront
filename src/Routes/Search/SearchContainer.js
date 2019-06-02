@@ -1,13 +1,17 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import SearchPresenter from "./searchPresenter";
+import SearchPresenter from "./SearchPresenter";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "./SearchQueries";
 
 export default withRouter(({ location: { search } }) => {
-  const searchTerm = search.split("=")[1];
-  const { data, loading } = useQuery(SEARCH);
-  return (
-    <SearchPresenter searchTerm={searchTerm} loading={loading} data={data} />
-  );
+  const term = search.split("=")[1];
+  const { data, loading } = useQuery(SEARCH, {
+    skip: term === undefined,
+    variables: { term }
+  });
+
+  return <SearchPresenter searchTerm={term} loading={loading} data={data} />;
 });
+
+/* 사실 여기에다가 propType 모양 잡는거 해야한다 */
