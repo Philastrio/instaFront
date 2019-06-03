@@ -15,7 +15,7 @@ const UserCard = ({ name, isFollowing, url, isSelf }) => (
   </Card>
 );
 
-UserCard.PropTypes = {
+UserCard.propTypes = {
   name: PropTypes.string.isRequired,
   isFollowing: PropTypes.bool.isRequired,
   url: PropTypes.string.isRequired,
