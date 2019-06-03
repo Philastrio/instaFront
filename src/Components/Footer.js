@@ -8,8 +8,10 @@ const Footer = styled.footer`
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
-  margin: 50px 0px;
+  margin: 30px 0px;
+  padding-top: 25vh;
 `;
+// vh 높이 단위: 화면을 100등분한 다음의 단위이다.
 
 const List = styled.ul`
   display: flex;

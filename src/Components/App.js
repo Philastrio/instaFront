@@ -12,6 +12,7 @@ import { useQuery } from "react-apollo-hooks";
 import Footer from "./Footer";
 import Header from "./Header";
 import Routes from "./Routes";
+import SearchPresenter from "../Routes/Search/SearchPresenter";
 
 const QUERY = gql`
   {
@@ -35,13 +36,11 @@ export default () => {
       <>
         <GlobalStyles />
         <Router>
-          <>
-            {isLoggedIn && <Header />}
-            <Wrapper>
-              <Routes isLoggedIn={isLoggedIn} />
-              <Footer />
-            </Wrapper>
-          </>
+          {isLoggedIn && <Header />}
+          <Wrapper>
+            <Routes isLoggedIn={isLoggedIn} />
+            <Footer />
+          </Wrapper>
         </Router>
         <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
       </>
