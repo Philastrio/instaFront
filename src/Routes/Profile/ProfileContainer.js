@@ -1,6 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import { gql } from "apollo-boost";
+import withRouter from "react-router-dom/withRouter";
+import { useQuery } from "react-apollo-hooks";
+import ProfilePresenter from "./ProfilePresenter";
 
 const GET_USER = gql`
   query seeUser($name: String!) {
@@ -26,3 +28,8 @@ const GET_USER = gql`
     }
   }
 `;
+
+export default withRouter(({ match: { params: { name } } }) => {
+  const { data, loading } = useQuery(GET_USER, { variables: { name } });
+  return <ProfilePresenter loading={loading} data={data} />;
+});

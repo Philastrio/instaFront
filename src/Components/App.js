@@ -12,7 +12,6 @@ import { useQuery } from "react-apollo-hooks";
 import Footer from "./Footer";
 import Header from "./Header";
 import Routes from "./Routes";
-import SearchPresenter from "../Routes/Search/SearchPresenter";
 
 const QUERY = gql`
   {
