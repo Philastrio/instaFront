@@ -18,7 +18,7 @@ export default () => {
   const firstName = useInput("");
   const secret = useInput("");
   const email = useInput("");
-  const requestSecretMutatin = useMutation(LOG_IN, {
+  const requestSecretMutation = useMutation(LOG_IN, {
     variables: { email: email.value }
   });
 
@@ -47,7 +47,8 @@ export default () => {
         try {
           const {
             data: { requestSecret }
-          } = await requestSecretMutatin();
+          } = await requestSecretMutation();
+          console.log(requestSecret);
           if (!requestSecret) {
             toast.error("계정이 없으신가요? 가입하기");
             setTimeout(() => {
@@ -78,7 +79,7 @@ export default () => {
             toast.error("계정을 생성할 수 없습니다");
           } else {
             toast.success("계정 생성에 성공했습니다. 로그인해주세요 ");
-            setTimeout(() => setAction("로그인"), 3000);
+            setTimeout(() => setAction("logIn"), 3000);
           }
         } catch (e) {
           toast.error(
